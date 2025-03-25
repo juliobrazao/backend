@@ -10,6 +10,4 @@ COPY . .
 
 EXPOSE 3001
 
-RUN npm install -g ts-node-dev
-
-CMD ["ts-node-dev", "--respawn", "--transpile-only", "src/main.ts"]
+CMD ["npm", "run", "start:dev"]
