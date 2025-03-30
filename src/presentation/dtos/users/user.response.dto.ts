@@ -2,12 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UserResponseDTO {
   @ApiProperty({
-    description: 'Database unique ID',
-    example: '1',
-  })
-  id: string;
-
-  @ApiProperty({
     description: 'User ID',
     example: 'john.doe',
   })

@@ -2,10 +2,13 @@ import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UserResponseDTO } from '@/presentation/dtos/users/user.response.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserRequestDTO } from '@/presentation/dtos/users/create-user.request.dto';
+import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
 
 @ApiTags('Users')
 @Controller('user')
 export class UserController {
+  constructor(private readonly createUserUseCase: CreateUserUseCase) {}
+
   @Get('all')
   @ApiOperation({
     summary: 'List all users',
@@ -43,7 +46,8 @@ export class UserController {
   })
   async createUser(
     @Body() user: CreateUserRequestDTO,
-  ): Promise<Partial<UserResponseDTO>> {
-    return user as Partial<UserResponseDTO>;
+  ): Promise<UserResponseDTO> {
+    const createdUser = await this.createUserUseCase.execute(user);
+    return createdUser;
   }
 }
