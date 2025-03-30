@@ -1,6 +1,8 @@
+import { UserMySQLEntity } from '@/domain/entities/user-mysql.entity';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserMySQLRepository } from '../repositories/user-mysql.repository';
 
 @Module({
   imports: [
@@ -17,7 +19,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         synchronize: true,
       }),
     }),
+    TypeOrmModule.forFeature([UserMySQLEntity]),
   ],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, UserMySQLRepository],
+  providers: [UserMySQLRepository],
 })
 export class MysqlModule {}
