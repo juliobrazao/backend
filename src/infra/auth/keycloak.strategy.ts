@@ -9,15 +9,15 @@ export class KeycloakStrategy extends PassportStrategy(Strategy) {
     const clientID = configService.get<string>('KEYCLOAK_CLIENT_ID');
     const clientSecret = configService.get<string>('KEYCLOAK_CLIENT_SECRET');
     const realm = configService.get<string>('KEYCLOAK_REALM');
-    const serverUrl = configService.get<string>('KEYCLOAK_SERVER_URL');
-    const redirectUri = configService.get<string>('KEYCLOAK_REDIRECT_URI');
+    const authServerURL = configService.get<string>('KEYCLOAK_SERVER_URL');
+    const callbackURL = configService.get<string>('KEYCLOAK_REDIRECT_URI');
 
     super({
       clientID,
       clientSecret,
       realm,
-      serverUrl,
-      redirectUri,
+      authServerURL,
+      callbackURL,
     });
   }
 
