@@ -5,6 +5,7 @@ import { MongoModule } from '@/infra/providers/mongo.module';
 import { UserModule } from './user.module';
 import { UserController } from '@/presentation/controllers/user.controller';
 import { KeycloakModule } from '../auth/keycloak.module';
+import { AuthController } from '@/presentation/controllers/auth.controller';
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import { KeycloakModule } from '../auth/keycloak.module';
     UserModule,
     KeycloakModule,
   ],
-  controllers: [UserController],
+  controllers: [UserController, AuthController],
 })
 export class AppModule {}
