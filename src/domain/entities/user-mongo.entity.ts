@@ -1,4 +1,6 @@
-export class UserEntity {
+import { Document } from 'mongoose';
+
+export class UserMongoEntity extends Document {
   userId: string;
   name: string;
   email: string;
@@ -12,6 +14,7 @@ export class UserEntity {
     isAdmin: boolean,
     createdAt: Date,
   ) {
+    super();
     this.userId = userId;
     this.name = name;
     this.email = email;

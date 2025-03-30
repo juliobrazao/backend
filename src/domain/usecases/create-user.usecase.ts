@@ -1,7 +1,7 @@
-import { UserRepository } from '@/infra/repositories/user.repository';
+import { UserRepository } from '@/infra/repositories/user-mongo.repository';
 import { CreateUserRequestDTO } from '@/presentation/dtos/users/create-user.request.dto';
 import { Injectable } from '@nestjs/common';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../entities/user-mongo.entity';
 
 @Injectable()
 export class CreateUserUseCase {

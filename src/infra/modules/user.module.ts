@@ -1,17 +1,20 @@
 import { Module } from '@nestjs/common';
 import { UserController } from '@/presentation/controllers/user.controller';
 import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
-import { UserRepository } from '../repositories/user.repository';
+import { UserMongoRepository } from '../repositories/user-mongo.repository';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema, UserSchemaFactory } from '../repositories/user.schema';
+import {
+  UserMongoSchema,
+  UserMongoSchemaFactory,
+} from '../repositories/user-mongo.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: UserSchema.name, schema: UserSchemaFactory },
+      { name: UserMongoSchema.name, schema: UserMongoSchemaFactory },
     ]),
   ],
   controllers: [UserController],
-  providers: [CreateUserUseCase, UserRepository],
+  providers: [CreateUserUseCase, UserMongoRepository],
 })
 export class UserModule {}
