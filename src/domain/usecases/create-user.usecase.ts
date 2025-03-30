@@ -1,14 +1,14 @@
-import { UserRepository } from '@/infra/repositories/user-mongo.repository';
+import { UserMongoRepository } from '@/infra/repositories/user-mongo.repository';
 import { CreateUserRequestDTO } from '@/presentation/dtos/users/create-user.request.dto';
 import { Injectable } from '@nestjs/common';
-import { UserEntity } from '../entities/user-mongo.entity';
+import { UserMongoEntity } from '../entities/user-mongo.entity';
 
 @Injectable()
 export class CreateUserUseCase {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(private readonly userRepository: UserMongoRepository) {}
 
-  async execute(createUserDTO: CreateUserRequestDTO): Promise<UserEntity> {
-    const user = new UserEntity(
+  async execute(createUserDTO: CreateUserRequestDTO): Promise<UserMongoEntity> {
+    const user = new UserMongoEntity(
       createUserDTO.userId,
       createUserDTO.name,
       createUserDTO.email,
