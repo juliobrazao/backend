@@ -4,6 +4,7 @@ import { MysqlModule } from '@/infra/providers/mysql.module';
 import { MongoModule } from '@/infra/providers/mongo.module';
 import { UserModule } from './user.module';
 import { UserController } from '@/presentation/controllers/user.controller';
+import { KeycloakModule } from '../auth/keycloak.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { UserController } from '@/presentation/controllers/user.controller';
     MysqlModule,
     MongoModule,
     UserModule,
+    KeycloakModule,
   ],
   controllers: [UserController],
 })

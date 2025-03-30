@@ -1,12 +1,16 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UserResponseDTO } from '@/presentation/dtos/users/user.response.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserRequestDTO } from '@/presentation/dtos/users/create-user.request.dto';
+import { KeycloakGuard } from '@/infra/auth/keycloak.guard';
+import { Roles } from '@/infra/auth/roles.decorator';
 
 @ApiTags('Users')
 @Controller('user')
 export class UserController {
   @Get('all')
+  @UseGuards(KeycloakGuard)
+  @Roles('god-mode')
   @ApiOperation({
     summary: 'List all users',
   })

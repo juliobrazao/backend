@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-keycloak';
+import { Strategy } from 'passport-keycloak-oauth2-oidc';
 
 @Injectable()
 export class KeycloakStrategy extends PassportStrategy(Strategy) {
