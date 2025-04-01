@@ -4,6 +4,7 @@ import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
 import { CreateUserRequestDTO } from '../dtos/users/create-user.request.dto';
 import { GetUserResponseDTO } from '../dtos/users/get-user.response.dto';
 import { GetAllUsersUseCase } from '@/domain/usecases/get-all-users.usecase';
+import { GetUserByIdUseCase } from '@/domain/usecases/get-user-by-id.usecase';
 
 @ApiTags('Users')
 @Controller('user')
@@ -11,6 +12,7 @@ export class UserController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly getAllUsersUseCase: GetAllUsersUseCase,
+    private readonly getUserByIdUseCase: GetUserByIdUseCase,
   ) {}
 
   @Post()
@@ -29,7 +31,7 @@ export class UserController {
     return createdUser;
   }
 
-  @Get('all')
+  @Get()
   @ApiOperation({
     summary: 'List all users',
   })
@@ -40,5 +42,18 @@ export class UserController {
   })
   async getUsers(): Promise<GetUserResponseDTO[]> {
     return this.getAllUsersUseCase.execute();
+  }
+
+  @Get(':id')
+  @ApiOperation({
+    summary: 'Get a user by specif ID',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User identified by ID passed via params',
+    type: GetUserResponseDTO,
+  })
+  async getUser(@Param('id') userId: string): Promise<GetUserResponseDTO> {
+    return this.getUserByIdUseCase.execute(userId);
   }
 }
