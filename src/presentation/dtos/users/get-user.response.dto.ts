@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateUserRequestDTO {
+export class GetUserResponseDTO {
   @ApiProperty({
     description: 'User ID',
     example: 'john.doe',
@@ -24,4 +24,10 @@ export class CreateUserRequestDTO {
     example: true,
   })
   isAdmin: boolean;
+
+  @ApiProperty({
+    description: 'User creation date in timestamp format',
+    example: new Date().getTime(),
+  })
+  createdAt: number;
 }
