@@ -3,11 +3,15 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
 import { CreateUserRequestDTO } from '../dtos/users/create-user.request.dto';
 import { GetUserResponseDTO } from '../dtos/users/get-user.response.dto';
+import { GetAllUsersUseCase } from '@/domain/usecases/get-all-users.usecase';
 
 @ApiTags('Users')
 @Controller('user')
 export class UserController {
-  constructor(private readonly createUserUseCase: CreateUserUseCase) {}
+  constructor(
+    private readonly createUserUseCase: CreateUserUseCase,
+    private readonly getAllUsersUseCase: GetAllUsersUseCase,
+  ) {}
 
   @Post()
   @ApiOperation({
@@ -35,6 +39,6 @@ export class UserController {
     type: [GetUserResponseDTO],
   })
   async getUsers(): Promise<GetUserResponseDTO[]> {
-    return {} as GetUserResponseDTO[];
+    return this.getAllUsersUseCase.execute();
   }
 }
