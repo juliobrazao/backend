@@ -16,7 +16,7 @@ export class KeycloakStrategy extends PassportStrategy(Strategy, 'keycloak') {
       clientID,
       clientSecret,
       callbackURL,
-      authorizationURL: `${authServerURL}/realms/${realm}/protocol/openid-connect/auth`,
+      authServerURL: `${authServerURL}/realms/${realm}/protocol/openid-connect/auth`,
       tokenURL: `${authServerURL}/realms/${realm}/protocol/openid-connect/token`,
       userInfoURL: `${authServerURL}/realms/${realm}/protocol/openid-connect/userinfo`,
     });
