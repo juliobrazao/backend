@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import IMySQLProxyRepository from '../repositories/abstract-mysql-proxy.repository';
-import GetUserByIdParams from '../shared/get-user-by-id.params';
-import User from '../entities/user.entity';
+import IMySQLProxyRepository from '@/domain/repositories/abstract-mysql-proxy.repository';
+import GetUserByIdParams from '@/domain/shared/get-user-by-id.params';
+import User from '@/domain/entities/user.entity';
 
 @Injectable()
 export class GetUserByIdUseCase {

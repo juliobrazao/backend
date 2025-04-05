@@ -1,13 +1,13 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateUserRequestDTO } from '@/presentation/dtos/users/create-user.request.dto';
+import { CreateUserResponseDTO } from '@/presentation/dtos/users/create-user.response.dto';
+import { GetUsersResponseDTO } from '@/presentation/dtos/users/get-users.response.dto';
+import { GetUserByIdResponseDTO } from '@/presentation/dtos/users/get-user-by-id.response.dto';
+import { GetUserByIdRequestDTO } from '@/presentation/dtos/users/get-user-by-id.request.dto';
 import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
-import { CreateUserRequestDTO } from '../dtos/users/create-user.request.dto';
-import { CreateUserResponseDTO } from '../dtos/users/create-user.response.dto';
-import { GetUsersResponseDTO } from '../dtos/users/get-users.response.dto';
 import { GetUsersUseCase } from '@/domain/usecases/get-users.usecase';
-import { GetUserByIdResponseDTO } from '../dtos/users/get-user-by-id.response.dto';
 import { GetUserByIdUseCase } from '@/domain/usecases/get-user-by-id.usecase';
-import { GetUserByIdRequestDTO } from '../dtos/users/get-user-by-id.request.dto';
 
 @ApiTags('Users')
 @Controller('user')

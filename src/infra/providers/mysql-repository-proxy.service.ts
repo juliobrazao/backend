@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import IMySQLProxyRepository from '@/domain/repositories/abstract-mysql-proxy.repository';
-import UserRepository from '../repositories/user.repository';
+import UserRepository from '@/infra/repositories/user.repository';
 import User from '@/domain/entities/user.entity';
 
 @Injectable()
