@@ -5,6 +5,9 @@ import { CreateUserRequestDTO } from '../dtos/users/create-user.request.dto';
 import { CreateUserResponseDTO } from '../dtos/users/create-user.response.dto';
 import { GetUsersResponseDTO } from '../dtos/users/get-users.response.dto';
 import { GetUsersUseCase } from '@/domain/usecases/get-users.usecase';
+import { GetUserByIdResponseDTO } from '../dtos/users/get-user-by-id.response.dto';
+import { GetUserByIdUseCase } from '@/domain/usecases/get-user-by-id.usecase';
+import { GetUserByIdRequestDTO } from '../dtos/users/get-user-by-id.request.dto';
 
 @ApiTags('Users')
 @Controller('user')
@@ -12,6 +15,7 @@ export class UserController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly getUsersUseCase: GetUsersUseCase,
+    private readonly getUserByIdUseCase: GetUserByIdUseCase,
   ) {}
 
   @Post()
@@ -42,5 +46,19 @@ export class UserController {
   })
   async getUsers(): Promise<GetUsersResponseDTO[]> {
     return this.getUsersUseCase.execute();
+  }
+
+  @Get(':userId')
+  @ApiOperation({
+    summary: 'List a specific user filtered by userID',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'A filtered user was found and provided successfully',
+  })
+  async getUserById(
+    @Param() userId: GetUserByIdRequestDTO,
+  ): Promise<GetUserByIdResponseDTO> {
+    return this.getUserByIdUseCase.execute(userId);
   }
 }
