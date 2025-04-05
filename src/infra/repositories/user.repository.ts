@@ -14,4 +14,8 @@ export default class UserRepository implements IUserRepository<User> {
   async create(user: User): Promise<User> {
     return this._repository.save(user);
   }
+
+  async get(): Promise<User[]> {
+    return this._repository.find();
+  }
 }
