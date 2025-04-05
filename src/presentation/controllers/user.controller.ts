@@ -17,7 +17,10 @@ export class UserController {
     description: 'A new user was created successfully',
   })
   async createUser(@Body() user: CreateUserRequestDTO): Promise<any> {
-    const createdUser = await this.createUserUseCase.execute(user);
+    const createdUser = await this.createUserUseCase.execute({
+      ...user,
+      createdAt: +new Date(),
+    });
     return createdUser;
   }
 }
