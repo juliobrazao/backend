@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class UserEntity {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -46,4 +46,13 @@ export class UserEntity {
     default: true,
   })
   isActive: boolean;
+
+  constructor(params) {
+    for (const key in params) {
+      if (Object.prototype.hasOwnProperty.call(params, key)) {
+        const param = params[key];
+        this[key] = param;
+      }
+    }
+  }
 }

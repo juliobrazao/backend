@@ -2,8 +2,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import IMySQLProxyRepository from '@/domain/repositories/abstract-mysql-proxy.repository';
-import UserRepository from '../repositories/mysql/user.repository';
-import { User } from '@/domain/entities/user.entity';
+import UserRepository from '../repositories/user.repository';
+import User from '@/domain/entities/user.entity';
 
 @Injectable()
 export default class MySQLRepositoryProxy
@@ -17,6 +17,6 @@ export default class MySQLRepositoryProxy
   ) {}
 
   onApplicationBootstrap() {
-    this.user = new UserRepository(this.userEntity as any);
+    this.user = new UserRepository(this.userEntity);
   }
 }

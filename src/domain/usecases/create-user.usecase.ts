@@ -1,18 +1,16 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { MYSQL_PROXY_REPOSITORY } from '@/infra/modules/mysql.module'; // ✅ Import the token
-import IMySQLProxyRepository from '../repositories/abstract-mysql-proxy.repository';
+import { Injectable } from '@nestjs/common';
+import IMySQLProxyRepository from '@/domain/repositories/abstract-mysql-proxy.repository';
+import User from '@/domain/entities/user.entity';
 import CreateUserParams from '../shared/create-user.params';
-import { UserEntity } from '@/infra/repositories/mysql/entities/user.entity';
 
 @Injectable()
 export class CreateUserUseCase {
-  constructor(
-    @Inject(MYSQL_PROXY_REPOSITORY) // ✅ Inject using the token
-    private readonly mysqlRepository: IMySQLProxyRepository,
-  ) {}
+  constructor(private readonly mysqlRepository: IMySQLProxyRepository) {}
 
-  async execute(user: CreateUserParams): Promise<UserEntity> {
-    const newUser = await this.mysqlRepository.user.create(user as UserEntity);
+  async execute(user: CreateUserParams): Promise<User> {
+    const newUser = await this.mysqlRepository.user.create(
+      user as unknown as User,
+    );
     return newUser;
   }
 }

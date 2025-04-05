@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from '@/domain/entities/user.entity';
+import { User } from '@/infra/repositories/mysql/entities/user.entity';
+import IMySQLProxyRepository from '@/domain/repositories/abstract-mysql-proxy.repository';
 import MySQLRepositoryProxy from '../providers/mysql-repository-proxy.service';
-
-// ✅ Define an injection token (string or symbol)
-export const MYSQL_PROXY_REPOSITORY = 'IMySQLProxyRepository';
 
 @Module({
   imports: [
@@ -30,10 +28,10 @@ export const MYSQL_PROXY_REPOSITORY = 'IMySQLProxyRepository';
   ],
   providers: [
     {
-      provide: MYSQL_PROXY_REPOSITORY, // ✅ Use a token instead of an interface
+      provide: IMySQLProxyRepository,
       useClass: MySQLRepositoryProxy,
     },
   ],
-  exports: [MYSQL_PROXY_REPOSITORY], // ✅ Export the token
+  exports: [IMySQLProxyRepository],
 })
 export class MySQLModule {}
