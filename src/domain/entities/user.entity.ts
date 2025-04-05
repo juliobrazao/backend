@@ -4,6 +4,7 @@ export default class User {
   name: string;
   email: string;
   isAdmin: boolean;
+  isActive: boolean;
   createdAt: Date;
 
   constructor(params) {
