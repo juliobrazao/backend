@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-keycloak-oauth2-oidc';
+import { Strategy, Profile } from 'passport-keycloak-oauth2-oidc';
 
 @Injectable()
-export class KeycloakStrategy extends PassportStrategy(Strategy) {
+export class KeycloakStrategy extends PassportStrategy(Strategy, 'keycloak') {
   constructor(configService: ConfigService) {
     const clientID = configService.get<string>('KEYCLOAK_CLIENT_ID');
     const clientSecret = configService.get<string>('KEYCLOAK_CLIENT_SECRET');
@@ -15,13 +15,19 @@ export class KeycloakStrategy extends PassportStrategy(Strategy) {
     super({
       clientID,
       clientSecret,
-      realm,
-      authServerURL,
       callbackURL,
+      authorizationURL: `${authServerURL}/realms/${realm}/protocol/openid-connect/auth`,
+      tokenURL: `${authServerURL}/realms/${realm}/protocol/openid-connect/token`,
+      userInfoURL: `${authServerURL}/realms/${realm}/protocol/openid-connect/userinfo`,
     });
   }
 
-  async validate(payload: any) {
-    return { userId: payload.sub, username: payload.preferred_username };
+  validate(
+    accessToken: string,
+    refreshToken: string,
+    profile: Profile,
+    done: Function,
+  ) {
+    done(null, profile);
   }
 }
