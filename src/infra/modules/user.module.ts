@@ -4,10 +4,16 @@ import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
 import { MySQLModule } from './mysql.module';
 import { GetUsersUseCase } from '@/domain/usecases/get-users.usecase';
 import { GetUserByIdUseCase } from '@/domain/usecases/get-user-by-id.usecase';
+import { UpdateUserUseCase } from '@/domain/usecases/update-user.usecase';
 
 @Module({
   imports: [MySQLModule],
   controllers: [UserController],
-  providers: [CreateUserUseCase, GetUsersUseCase, GetUserByIdUseCase],
+  providers: [
+    CreateUserUseCase,
+    GetUsersUseCase,
+    GetUserByIdUseCase,
+    UpdateUserUseCase,
+  ],
 })
 export class UserModule {}

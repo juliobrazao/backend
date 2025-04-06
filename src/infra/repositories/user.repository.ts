@@ -23,8 +23,17 @@ export default class UserRepository
   }
 
   async find({ userId }: GetUserByIdParams): Promise<User> {
-    return (await this._repository.findOneBy({
-      userId,
-    })) as User;
+    return (await this._repository.findOneBy({ userId })) as User;
+  }
+
+  async update(id: string, updates: Partial<User>): Promise<User> {
+    await this._repository.update(id, updates);
+    const updatedUser = await this._repository.findOneBy({ userId: id });
+
+    if (!updatedUser) {
+      throw new Error(`User with id ${id} not found after update.`);
+    }
+
+    return updatedUser;
   }
 }

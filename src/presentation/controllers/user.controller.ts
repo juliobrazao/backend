@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserRequestDTO } from '@/presentation/dtos/users/create-user.request.dto';
 import { CreateUserResponseDTO } from '@/presentation/dtos/users/create-user.response.dto';
@@ -8,6 +8,8 @@ import { GetUserByIdRequestDTO } from '@/presentation/dtos/users/get-user-by-id.
 import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
 import { GetUsersUseCase } from '@/domain/usecases/get-users.usecase';
 import { GetUserByIdUseCase } from '@/domain/usecases/get-user-by-id.usecase';
+import { UpdateUserRequestDTO } from '../dtos/users/update-user.request.dto';
+import { UpdateUserUseCase } from '@/domain/usecases/update-user.usecase';
 
 @ApiTags('Users')
 @Controller('user')
@@ -16,6 +18,7 @@ export class UserController {
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly getUsersUseCase: GetUsersUseCase,
     private readonly getUserByIdUseCase: GetUserByIdUseCase,
+    private readonly updateUserUseCase: UpdateUserUseCase,
   ) {}
 
   @Post()
@@ -60,5 +63,20 @@ export class UserController {
     @Param() userId: GetUserByIdRequestDTO,
   ): Promise<GetUserByIdResponseDTO> {
     return this.getUserByIdUseCase.execute(userId);
+  }
+
+  @Patch(':userId')
+  @ApiOperation({
+    summary: 'Updates a user with new information',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Updated user was found and provided successfully',
+  })
+  async updateUser(
+    @Param('userId') userId: string,
+    @Body() updatedInfo: UpdateUserRequestDTO,
+  ) {
+    return this.updateUserUseCase.execute(userId, updatedInfo);
   }
 }
