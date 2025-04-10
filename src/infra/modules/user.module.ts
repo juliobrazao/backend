@@ -5,6 +5,7 @@ import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
 import { GetUsersUseCase } from '@/domain/usecases/get-users.usecase';
 import { GetUserByIdUseCase } from '@/domain/usecases/get-user-by-id.usecase';
 import { UpdateUserUseCase } from '@/domain/usecases/update-user.usecase';
+import { DeleteUserUseCase } from '@/domain/usecases/delete-user.usecase';
 
 @Module({
   imports: [MySQLModule],
@@ -14,6 +15,7 @@ import { UpdateUserUseCase } from '@/domain/usecases/update-user.usecase';
     GetUsersUseCase,
     GetUserByIdUseCase,
     UpdateUserUseCase,
+    DeleteUserUseCase,
   ],
 })
 export class UserModule {}

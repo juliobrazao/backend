@@ -8,9 +8,10 @@ export class UpdateUserUseCase {
   constructor(private readonly mysqlRepository: IMySQLProxyRepository) {}
 
   async execute(
-    userId: string,
+    id: string,
     updatedUserParams: UpdateUserParams,
   ): Promise<User> {
-    return this.mysqlRepository.user.update(userId, updatedUserParams);
+    console.log(id, updatedUserParams);
+    return this.mysqlRepository.user.update(id, updatedUserParams);
   }
 }

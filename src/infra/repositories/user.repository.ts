@@ -28,7 +28,14 @@ export default class UserRepository
     return this._repository.findOneBy({ id }) as unknown as User;
   }
 
-  async update(id: string, updates: Partial<User>): Promise<any> {
-    await this._repository.update({ userId: id }, updates);
+  async update(id: string, updates: Partial<User>): Promise<User> {
+    await this._repository.update({ id }, updates);
+    return this.find({ id });
+  }
+
+  async delete(id: string): Promise<string> {
+    const userToDelete = await this.find({ id });
+    await this._repository.delete(id);
+    return `User '${userToDelete.userId}' was deleted successfully!`;
   }
 }

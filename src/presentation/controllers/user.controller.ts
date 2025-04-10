@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserRequestDTO } from '@/presentation/dtos/users/create-user.request.dto';
 import { CreateUserResponseDTO } from '@/presentation/dtos/users/create-user.response.dto';
@@ -10,6 +18,7 @@ import { GetUsersUseCase } from '@/domain/usecases/get-users.usecase';
 import { GetUserByIdUseCase } from '@/domain/usecases/get-user-by-id.usecase';
 import { UpdateUserRequestDTO } from '@/presentation/dtos/users/update-user.request.dto';
 import { UpdateUserUseCase } from '@/domain/usecases/update-user.usecase';
+import { DeleteUserUseCase } from '@/domain/usecases/delete-user.usecase';
 
 @ApiTags('Users')
 @Controller('user')
@@ -19,6 +28,7 @@ export class UserController {
     private readonly getUsersUseCase: GetUsersUseCase,
     private readonly getUserByIdUseCase: GetUserByIdUseCase,
     private readonly updateUserUseCase: UpdateUserUseCase,
+    private readonly deleteUserUseCase: DeleteUserUseCase,
   ) {}
 
   @Post()
@@ -65,7 +75,7 @@ export class UserController {
     return this.getUserByIdUseCase.execute(id);
   }
 
-  @Patch(':userId')
+  @Patch(':id')
   @ApiOperation({
     summary: 'Updates a user with new information',
   })
@@ -74,9 +84,21 @@ export class UserController {
     description: 'Updated user was found and provided successfully',
   })
   async updateUser(
-    @Param('userId') userId: string,
+    @Param('id') id: string,
     @Body() updatedInfo: UpdateUserRequestDTO,
   ) {
-    return this.updateUserUseCase.execute(userId, updatedInfo);
+    return this.updateUserUseCase.execute(id, updatedInfo);
+  }
+
+  @Delete(':id')
+  @ApiOperation({
+    summary: 'Deletes a user from DB',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User was found and deleted successfully',
+  })
+  async deleteUser(@Param('id') id: string): Promise<string> {
+    return this.deleteUserUseCase.execute({ id });
   }
 }

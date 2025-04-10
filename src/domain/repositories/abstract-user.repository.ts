@@ -3,4 +3,5 @@ export default abstract class IUserRepository<Entity, Filter> {
   abstract get(): Promise<Entity[]>;
   abstract find(filter: Filter): Promise<Entity>;
   abstract update(id: string, updates: Partial<Entity>): Promise<Entity>;
+  abstract delete(id: string): Promise<string>;
 }
