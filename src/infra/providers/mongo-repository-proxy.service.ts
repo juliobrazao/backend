@@ -1,9 +1,9 @@
-import IMongoProxyRepository from '@/domain/repositories/abstract-mongo-proxy.repository';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import UserRepository from '@/infra/repositories/user.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import User from '@/domain/entities/user.entity';
 import { Repository } from 'typeorm';
+import IMongoProxyRepository from '@/domain/repositories/abstract-mongo-proxy.repository';
+import UserRepository from '@/infra/repositories/user.repository';
+import User from '@/domain/entities/user.entity';
 
 @Injectable()
 export default class MongoRepositoryProxy
