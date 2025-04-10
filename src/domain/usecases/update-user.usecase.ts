@@ -1,15 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import IMySQLProxyRepository from '../repositories/abstract-mysql-proxy.repository';
+import IMySQLProxyRepository from '@/domain/repositories/abstract-mysql-proxy.repository';
 import User from '@/domain/entities/user.entity';
-import UpdateUserParams from '../shared/update-user.params';
-import { GetUserByIdUseCase } from './get-user-by-id.usecase';
+import UpdateUserParams from '@/domain/shared/update-user.params';
 
 @Injectable()
 export class UpdateUserUseCase {
-  constructor(
-    private readonly mysqlRepository: IMySQLProxyRepository,
-    private readonly getUserByIdUseCase: GetUserByIdUseCase,
-  ) {}
+  constructor(private readonly mysqlRepository: IMySQLProxyRepository) {}
 
   async execute(
     userId: string,

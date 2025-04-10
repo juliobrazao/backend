@@ -8,7 +8,7 @@ import { GetUserByIdRequestDTO } from '@/presentation/dtos/users/get-user-by-id.
 import { CreateUserUseCase } from '@/domain/usecases/create-user.usecase';
 import { GetUsersUseCase } from '@/domain/usecases/get-users.usecase';
 import { GetUserByIdUseCase } from '@/domain/usecases/get-user-by-id.usecase';
-import { UpdateUserRequestDTO } from '../dtos/users/update-user.request.dto';
+import { UpdateUserRequestDTO } from '@/presentation/dtos/users/update-user.request.dto';
 import { UpdateUserUseCase } from '@/domain/usecases/update-user.usecase';
 
 @ApiTags('Users')
@@ -60,9 +60,9 @@ export class UserController {
     description: 'A filtered user was found and provided successfully',
   })
   async getUserById(
-    @Param() userId: GetUserByIdRequestDTO,
+    @Param() id: GetUserByIdRequestDTO,
   ): Promise<GetUserByIdResponseDTO> {
-    return this.getUserByIdUseCase.execute(userId);
+    return this.getUserByIdUseCase.execute(id);
   }
 
   @Patch(':userId')
