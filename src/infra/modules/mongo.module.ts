@@ -16,8 +16,10 @@ import MongoRepositoryProxy from '../providers/mongo-repository-proxy.service';
       useFactory: (configService: ConfigService) => ({
         type: 'mongodb',
         url: `mongodb://${configService.get<string>('MONGO_USER')}:${configService.get<string>('MONGO_PASSWORD')}@${configService.get<string>('MONGO_HOST')}:${configService.get<string>('MONGO_PORT')}/${configService.get<string>('MONGO_DATABASE')}?authSource=admin`,
-        autoLoadEntities: true,
         synchronize: true,
+        entities: [
+          __dirname + '/../repositories/mongo/entities/*.entity{.ts,.js}',
+        ],
       }),
     }),
     TypeOrmModule.forFeature([User]),

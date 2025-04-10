@@ -20,8 +20,10 @@ import MySQLRepositoryProxy from '../providers/mysql-repository-proxy.service';
         username: configService.get<string>('MYSQL_USER'),
         password: configService.get<string>('MYSQL_PASSWORD'),
         database: configService.get<string>('MYSQL_DATABASE'),
-        autoLoadEntities: true,
         synchronize: configService.get<boolean>('MYSQL_SYNCHRONIZE'),
+        entities: [
+          __dirname + '/../repositories/mysql/entities/*.entity{.ts,.js}',
+        ],
       }),
     }),
     TypeOrmModule.forFeature([User]),
