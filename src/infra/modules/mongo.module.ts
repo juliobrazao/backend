@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from '../repositories/mongo/entities/user.entity';
+import { UserMongo } from '../repositories/mongo/entities/user-mongo.entity';
 import IMongoProxyRepository from '@/domain/repositories/abstract-mongo-proxy.repository';
 import MongoRepositoryProxy from '../providers/mongo-repository-proxy.service';
 
@@ -22,7 +22,7 @@ import MongoRepositoryProxy from '../providers/mongo-repository-proxy.service';
         ],
       }),
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([UserMongo]),
   ],
   providers: [
     {

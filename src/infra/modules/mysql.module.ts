@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from '@/infra/repositories/mysql/entities/user.entity';
+import { UserMySQL } from '@/infra/repositories/mysql/entities/user-mysql.entity';
 import IMySQLProxyRepository from '@/domain/repositories/abstract-mysql-proxy.repository';
 import MySQLRepositoryProxy from '../providers/mysql-repository-proxy.service';
 
@@ -26,7 +26,7 @@ import MySQLRepositoryProxy from '../providers/mysql-repository-proxy.service';
         ],
       }),
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([UserMySQL]),
   ],
   providers: [
     {
