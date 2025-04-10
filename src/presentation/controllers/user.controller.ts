@@ -61,9 +61,9 @@ export class UserController {
     return this.getUsersUseCase.execute();
   }
 
-  @Get(':userId')
+  @Get(':id')
   @ApiOperation({
-    summary: 'List a specific user filtered by userID',
+    summary: 'List a specific user filtered by id',
   })
   @ApiResponse({
     status: 200,
