@@ -1,15 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserMySQL } from '@/infra/repositories/mysql/entities/user-mysql.entity';
-import IMySQLProxyRepository from '@/domain/repositories/abstract-mysql-proxy.repository';
-import MySQLRepositoryProxy from '../providers/mysql-repository-proxy.service';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -26,14 +20,6 @@ import MySQLRepositoryProxy from '../providers/mysql-repository-proxy.service';
         ],
       }),
     }),
-    TypeOrmModule.forFeature([UserMySQL]),
   ],
-  providers: [
-    {
-      provide: IMySQLProxyRepository,
-      useClass: MySQLRepositoryProxy,
-    },
-  ],
-  exports: [IMySQLProxyRepository],
 })
 export class MySQLModule {}
