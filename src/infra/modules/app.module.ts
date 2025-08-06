@@ -7,9 +7,9 @@ import { MongoModule } from './mongo.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MySQLModule,
+    // MySQLModule,
     MongoModule,
-    UserModule,
+    // UserModule,
   ],
 })
 export class AppModule {}
