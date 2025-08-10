@@ -73,5 +73,5 @@ fi
 
 # Start your backend service
 echo "Starting backend service..."
-docker-compose up --build -d
+docker compose up --build -d
 docker ps
